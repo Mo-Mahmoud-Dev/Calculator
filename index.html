@@ -3,9 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ===== PWA SETUP ===== -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1E40AF">
+
+<link rel="manifest" href="/Calculator/manifest.json">
+
+<!-- أيقونة آيفون -->
+<link rel="apple-touch-icon" href="/Calculator/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Calculator">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/Calculator/sw.js', { scope: '/Calculator/' })
+        .then((reg) => console.log('SW registered:', reg.scope))
+        .catch((err) => console.error('SW failed:', err));
+    });
+  }
+</script>
+<!-- ===== END PWA SETUP ===== -->
     <link rel="stylesheet" href="style.css">
     <title>Calculator App</title>
+
 </head>
 
 <body>
@@ -18,10 +39,8 @@
         <div class="calculator_row"><button>1</button><button>2</button><button>3</button><button>+</button></div>
         <div class="calculator_row"><button>Del</button><button>0</button><button>.</button><button>=</button></div>
     </div>
-    <!--* Math.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/15.1.0/math.js"
-        integrity="sha512-3y6BeMscN23skftXPwx0f5RI6brbJlEfaZ3KInpeIkKjFunP4toeg9XyEsSo4zq+7ZqvHJvD9S2WFIk0yT5mzw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--* Math.js library (local copy for offline support) -->
+    <script src="math.js"></script>
     <!--* Script -->
     <script src="script.js"></script>
 </body>
